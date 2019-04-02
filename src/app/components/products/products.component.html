@@ -1,7 +1,7 @@
 <div class="container">
   <hr>
   <div class="list-group">
-    <a class="list-group-item list-group-item-action" *ngFor="let product of products">
+    <a class="list-group-item list-group-item-action" *ngFor="let product of products" (click)="goToProduct(product)">
       <img src="assets/img/pechuga.jpg" alt="" class="rounded float-left">
       <h5 class="float-left ml-10">{{product.code}} - {{product.name}}</h5>
       <div class="btn-group float-right">
