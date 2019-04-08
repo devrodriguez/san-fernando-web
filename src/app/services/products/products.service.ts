@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/models/product.model';
+import { Util } from 'src/app/util';
 
 
 @Injectable({
@@ -8,17 +9,23 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductsService {
 
+  util: Util = new Util();
+
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get('http://192.168.0.27:8000/api/products');
+    return this.http.get(`${this.util.apiUrl}/products`);
   }
 
   getProduct(id: number) {
-    return this.http.get(`http://192.168.0.27:8000/api/products/${id}`);
+    return this.http.get(`${this.util.apiUrl}/products/${id}`);
   }
 
   updateProduct(product: Product) {
-    return this.http.put(`http://192.168.0.27:8000/api/products/${product.id}`, product);
+    return this.http.put(`${this.util.apiUrl}/products/${product.id}`, product);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.util.apiUrl}/products/${id}`);
   }
 }

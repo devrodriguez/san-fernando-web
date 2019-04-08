@@ -11,6 +11,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class ProductComponent implements OnInit {
 
   product: Product = new Product(null, null, null, null, null, null);
+  alert_message: string = '';
 
   constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService) {
     this.activatedRoute.params.subscribe(params => {
@@ -29,11 +30,30 @@ export class ProductComponent implements OnInit {
 
   updateProduct() {
     this.productsService.updateProduct(this.product).subscribe(data => {
-      console.log(data);
+      if(data) {
+        this.alert_message = `${data['code']} actualizado`;
+      }
     },
     (err) => {
       console.error(err);
     });
+  }
+
+  processFile(input: any) {
+    const file: File = input.files[0];
+    const reader = new FileReader();
+
+    // If file size 1MB
+    if(file.size > 1048576) {
+      throw 'File size';
+    }
+
+    reader.addEventListener('load', (event: any) => {
+      this.product.image = event.target.result;
+    });
+
+    reader.readAsDataURL(file);
+     
   }
 
 }

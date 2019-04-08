@@ -1,6 +1,12 @@
 <div class="container">
   <hr>
+  <div class="alert alert-info" *ngIf="alert_message">
+    {{alert_message}}
+  </div>
   <form>
+    <div class="form-group" *ngIf="product.code">
+      <h4>{{product.code}}</h4>
+    </div>
     <div class="form-group">
       <label for="name">Nombre</label>
       <input type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control" placeholder="" aria-describedby="helpId">
@@ -11,6 +17,9 @@
     </div>
     <div class="form-group">
       <textarea name="description" id="description" [(ngModel)]="product.description" class="form-control" cols="30" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+      <input #imageInput type="file" class="form-control" (change)="processFile(imageInput)">
     </div>
     <button type="button" class="btn btn-primary" (click)="updateProduct()">Actualizar</button>
   </form>

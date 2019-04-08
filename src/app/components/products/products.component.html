@@ -1,17 +1,20 @@
 <div class="container">
   <hr>
-  <div class="list-group">
-    <a class="list-group-item list-group-item-action" *ngFor="let product of products" (click)="goToProduct(product)">
-      <img src="assets/img/pechuga.jpg" alt="" class="rounded float-left">
+  <div class="alert alert-info">
+    {{alert_message}}
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of products">
+      <img src="http://192.168.0.29:8000/storage/{{product.code}}" alt="" class="rounded float-left">
       <h5 class="float-left ml-10">{{product.code}} - {{product.name}}</h5>
       <div class="btn-group float-right">
         <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Editar</button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Editar</a>
-          <a class="dropdown-item" href="#">Eliminar</a>
+          <a class="dropdown-item" href="#" (click)="goToProduct(product, $event)">Editar</a>
+          <a class="dropdown-item" href="#" (click)="deleteProduct(product, $event)">Eliminar</a>
         </div>
       </div>
       <h5 class="float-right mr-10">{{product.price | currency:'COP':'$':'1.0'}}</h5>
-    </a>
-  </div>
+    </li>
+  </ul>
 </div>

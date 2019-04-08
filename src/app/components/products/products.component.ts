@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
+  alert_message: string = '';
 
   constructor(private productsService: ProductsService, private router: Router) { }
 
@@ -27,7 +28,18 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  goToProduct(product: Product) {
+  deleteProduct(product: Product, event: any) {
+    event.preventDefault();
+    this.productsService.deleteProduct(product.id).subscribe(data => {
+      this.alert_message = `${product.code} eliminado`;
+    },
+    (err) => {
+      console.error(err);
+    });
+  }
+
+  goToProduct(product: Product, event: any) {
+    event.preventDefault();
     this.router.navigate(['/product', product.id])
   }
 
