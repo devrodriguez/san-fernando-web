@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ValidImagePipe } from './pipes/valid-image.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     HomeComponent,
     ProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    ValidImagePipe
   ],
   imports: [
     BrowserModule,

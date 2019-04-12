@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Util } from 'src/app/util';
+
 
 @Component({
   selector: 'app-product',
@@ -42,6 +44,9 @@ export class ProductComponent implements OnInit {
   processFile(input: any) {
     const file: File = input.files[0];
     const reader = new FileReader();
+    const util: Util = new Util();
+
+    const image = new Image();
 
     // If file size 1MB
     if(file.size > 1048576) {
@@ -49,7 +54,20 @@ export class ProductComponent implements OnInit {
     }
 
     reader.addEventListener('load', (event: any) => {
-      this.product.image = event.target.result;
+
+      image.src = event.target.result;
+
+      image.onload = () => {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+
+        canvas.width = util.imageSize;
+        canvas.height = util.imageSize;
+
+        context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+
+        this.product.image = canvas.toDataURL();
+      }
     });
 
     reader.readAsDataURL(file);
