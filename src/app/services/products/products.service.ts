@@ -14,7 +14,7 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get(`${this.util.apiUrl}/products`);
+    return this.http.get(`${this.util.apiUrl}/products/image/1`);
   }
 
   getProduct(id: number) {

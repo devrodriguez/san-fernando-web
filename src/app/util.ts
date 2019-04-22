@@ -1,5 +1,7 @@
 export class Util {
-    public apiUrl: string = "http://10.200.5.234:8000/api";
-    public storageUrl: string = "http://10.200.5.234:8000/storage";
-    public imageSize: number = 180;
+    private ip: string = '192.168.0.24';
+    private port: number = 8000;
+    public apiUrl: string = `http://${this.ip}:${this.port}/api`;
+    public storageUrl: string = `http://${this.ip}:${this.port}/storage`;
+    public imageSize: number = 320;
 }
