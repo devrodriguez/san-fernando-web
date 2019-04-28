@@ -16,11 +16,18 @@
       <input type="number" name="price" id="price" [(ngModel)]="product.price" class="form-control" placeholder="" aria-describedby="helpId">
     </div>
     <div class="form-group">
-      <textarea name="description" id="description" [(ngModel)]="product.description" class="form-control" cols="30" rows="5"></textarea>
+      <textarea name="description" id="description" [(ngModel)]="product.description" class="form-control" cols="30" rows="3"></textarea>
     </div>
-    <div class="form-group">
-      <input #imageInput type="file" class="form-control" (change)="processFile(imageInput)">
+    <div class="row">
+      <div class="col-sm-1">
+        <img [src]="'data:image/png;base64,'+product.data_img" alt="" class="rounded min-image">
+      </div>
+      <div class="col-sm-3">
+        <input #imageInput type="file" class="form-control" (change)="processFile(imageInput)">
+      </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="updateProduct()">Actualizar</button>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="createProduct()" *ngIf="productId == 0">Crear</button>
+    <button type="button" class="btn btn-primary" (click)="updateProduct()" *ngIf="productId != 0">Actualizar</button>
   </form>
 </div>

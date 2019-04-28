@@ -13,11 +13,14 @@ import { Util } from 'src/app/util';
 export class ProductComponent implements OnInit {
 
   product: Product = new Product(null, null, null, null, null, null);
-  alert_message: string = '';
+  alertMessage: string = '';
+  productId: number = 0;
 
   constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService) {
     this.activatedRoute.params.subscribe(params => {
-      this.productsService.getProduct(params['id']).subscribe((product: Product) => {
+      this.productId = params['id'];
+      this.productsService.getProduct(this.productId).subscribe((product: Product) => {
+        console.log(product);
         this.product = product;
       },
       (err) => {
@@ -30,10 +33,19 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  createProduct() {
+    this.productsService.createProduct(this.product).subscribe(data => {
+      this.alertMessage = `${data['code']} creado.`;
+    },
+    (err) => {
+      console.log(err);
+    });
+  }
+
   updateProduct() {
     this.productsService.updateProduct(this.product).subscribe(data => {
       if(data) {
-        this.alert_message = `${data['code']} actualizado`;
+        this.alertMessage = `${data['code']} actualizado.`;
       }
     },
     (err) => {

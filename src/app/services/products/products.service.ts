@@ -14,11 +14,15 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get(`${this.util.apiUrl}/products/image/1`);
+    return this.http.get(`${this.util.apiUrl}/products?image=1`);
   }
 
   getProduct(id: number) {
     return this.http.get(`${this.util.apiUrl}/products/${id}`);
+  }
+
+  createProduct(product: Product) {
+    return this.http.post(`${this.util.apiUrl}/products`, product);
   }
 
   updateProduct(product: Product) {
